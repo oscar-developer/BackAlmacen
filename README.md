@@ -1,35 +1,97 @@
 # BackAlmacen
-Backend de sistema de almacén desarrollado con Spring Boot 3, integrado con una base de datos PostgreSQL.
 
+Backend del sistema de almacén desarrollado con **Spring Boot 3**, integrado con una base de datos **PostgreSQL**.
 
+---
 
-# *****  NOTAS ADICIONALES ******
-# para crear el JAR se ejecuta el siguiente comando
-# en windows 
+## 🧱 Compilación del JAR
+
+Para generar el archivo `.jar`:
+
+- **En Windows**:
+
+```bash
 ./mvnw.cmd clean package
-# en linux
+```
+
+- **En Linux/macOS**:
+
+```bash
 ./mvnw clean package
+```
 
+---
 
-# PARA PROBAR EL .JAR EN LOCAL
-# ir "cd" a la carpeta donde esta el .jar
-java -jar .\springboot-api-0.0.1-SNAPSHOT.jar
+## 🚀 Ejecutar el JAR localmente
 
+Ubícate en la carpeta donde se generó el `.jar` y ejecuta:
 
+```bash
+java -jar springboot-api-0.0.1-SNAPSHOT.jar
+```
 
-# ojo para compilar en multiples plataformas usar(docker buildx use mybuilder)
-docker buildx create --name mybuilder --driver docker-container  --bootstrap
-# user el buildx creado
-docker buildx use
-# para vera las propiedades del buildx instalado
-docker buildx inspect 
+---
 
+## 🐳 Construcción multiplataforma con Docker
 
-# parta Verifica si estás logueado en Docker Hub
-# Si ya estás logueado, verás algo como:
-# Login Succeeded
-# Si no lo estás, te pedirá tu usuario y contraseña (o token de acceso de Docker Hub).
+> Para crear imágenes compatibles con distintas arquitecturas, asegúrate de tener `buildx` configurado.
+
+1. Crear el builder (solo la primera vez):
+
+```bash
+docker buildx create --name mybuilder --driver docker-container --bootstrap
+```
+
+2. Usar el builder creado:
+
+```bash
+docker buildx use mybuilder
+```
+
+3. Verificar el builder activo:
+
+```bash
+docker buildx inspect
+```
+
+---
+
+## 🔐 Iniciar sesión en Docker Hub
+
+Verifica si estás autenticado:
+
+```bash
 docker login
+```
 
-# para compilar o crear una imagen y desplegarlo a dockerhub
-docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t oscardev7/backalmacen:1.0.0 --push .
+- Si ves `Login Succeeded`, ya estás autenticado.
+- Si no, ingresa tu usuario y contraseña (o token).
+
+---
+
+## 📦 Construir y subir imagen Docker a Docker Hub
+
+Ejecuta el siguiente comando para compilar la imagen para múltiples plataformas y subirla:
+
+```bash
+docker buildx build \
+  --platform linux/amd64,linux/arm64,linux/arm/v7 \
+  -t oscardev7/backalmacen:1.0.0 \
+  --push .
+```
+
+> ⚠️ Asegúrate de que el nombre del repositorio en Docker Hub esté en minúsculas (`backalmacen`).
+
+---
+
+## 📌 Notas adicionales
+
+- Este proyecto requiere **Java 21** y **Docker** instalado.
+- Asegúrate de tener acceso a **Docker Hub** para publicar imágenes.
+- Se recomienda usar el JDK Temurin (`eclipse-temurin`) como base para las imágenes.
+
+---
+
+## ✍️ Autor
+
+Oscar Dev – [@oscardev7](https://hub.docker.com/u/oscardev7)
