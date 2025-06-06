@@ -74,10 +74,7 @@ docker login
 Ejecuta el siguiente comando para compilar la imagen para múltiples plataformas y subirla:
 
 ```bash
-docker buildx build \
-  --platform linux/amd64,linux/arm64,linux/arm/v7 \
-  -t oscardev7/backalmacen:1.0.0 \
-  --push .
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t oscardev7/backalmacen:1.0.0 --push .
 ```
 
 > ⚠️ Asegúrate de que el nombre del repositorio en Docker Hub esté en minúsculas (`backalmacen`).
