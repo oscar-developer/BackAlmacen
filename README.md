@@ -36,19 +36,24 @@ java -jar springboot-api-0.0.1-SNAPSHOT.jar
 
 > Para crear imágenes compatibles con distintas arquitecturas, asegúrate de tener `buildx` configurado.
 
-1. Crear el builder (solo la primera vez):
+1. Registrar QEMU (solo una vez por sistema)
+```bash
+docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+```
+
+2. Crear el builder (solo la primera vez):
 
 ```bash
 docker buildx create --name mybuilder --driver docker-container --bootstrap
 ```
 
-2. Usar el builder creado:
+3. Usar el builder creado:
 
 ```bash
 docker buildx use mybuilder
 ```
 
-3. Verificar el builder activo:
+4. Verificar el builder activo:
 
 ```bash
 docker buildx inspect
@@ -74,7 +79,7 @@ docker login
 Ejecuta el siguiente comando para compilar la imagen para múltiples plataformas y subirla:
 
 ```bash
-docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t oscardev7/backalmacen:1.0.0 --push .
+docker buildx build --platform linux/amd64,linux/arm64 -t oscardev7/backalmacen:1.0.3 --push .
 ```
 
 > ⚠️ Asegúrate de que el nombre del repositorio en Docker Hub esté en minúsculas (`backalmacen`).

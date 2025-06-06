@@ -1,7 +1,6 @@
 # Imagen base con Java 21 (solo JRE)
-#FROM --platform=linux/amd64  eclipse-temurin:21-jre
-FROM --platform=$BUILDPLATFORM eclipse-temurin:21-jre
-# FROM eclipse-temurin:21-jre
+# Usa una imagen multiplataforma de Java 21
+FROM eclipse-temurin:21-jdk-alpine-3.21
 
 # Directorio de trabajo dentro del contenedor
 WORKDIR /app
